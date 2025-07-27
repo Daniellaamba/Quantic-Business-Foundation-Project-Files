@@ -124,7 +124,7 @@ GROUP BY home_ownership, term
 ORDER BY count,
 count DESC;
 
--- 12. Average Loan Amount y Home Ownership
+-- QUERY 11. Average Loan Amount y Home Ownership
 SELECT c.customer_id, l.credit_score,
        COUNT(*) AS count
 FROM loan.customers c
