@@ -47,7 +47,8 @@ JOIN loan.loans l
 ON c.customer_id = l.customer_id
 WHERE l.credit_score IS NOT NULL
 GROUP BY c.customer_id, l.credit_score
-ORDER BY l.credit_score DESC;
+ORDER BY l.credit_score DESC
+LIMIT 5;
 
 --QUERY 3: MONTHLY REVENUE FROM PERFORMING LOANS
 
@@ -104,7 +105,7 @@ FROM loan.Loans
 GROUP BY term
 ORDER BY default_rate_percent DESC;
 
---QUERY 9: Home status by Job tenure
+--QUERY 9: Loan status by Job tenure
 SELECT 
     c.years_in_current_job,
     l.loan_status,
@@ -115,8 +116,6 @@ GROUP BY c.years_in_current_job, l.loan_status
 ORDER BY c.years_in_current_job ASC
 LIMIT 10;
 
-
-
 --QUERY 10 : Home Ownership
 SELECT home_ownership, term, COUNT(*) AS count
 FROM loan.Loans l
@@ -125,25 +124,7 @@ GROUP BY home_ownership, term
 ORDER BY count,
 count DESC;
 
-
--- 13. Overall Default rate
-SELECT 
-	ROUND(SUM(CASE WHEN loan_status = 'Charged Off' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) 
-AS default_rate_percentage
-FROM loan.Loans;
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- 12. Average Loan Amount y Home Ownership
 SELECT c.customer_id, l.credit_score,
        COUNT(*) AS count
 FROM loan.customers c
@@ -153,4 +134,3 @@ WHERE l.credit_score IS NOT NULL
 GROUP BY c.customer_id, l.credit_score
 ORDER BY l.credit_score DESC;
 
-SELECT * FROM loan.loans
